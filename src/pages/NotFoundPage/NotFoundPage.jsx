@@ -6,7 +6,7 @@ const NotFoundPage = () => {
     <div className={s.imgBox}>
       <img src="./error.jpg" alt="Not Found" />
       <h1>
-        <Link to="/">Go to HomePage</Link>
+        <Link to="/">Go to Home Page</Link>
       </h1>
     </div>
   );
