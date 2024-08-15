@@ -1,0 +1,16 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.active {
+  color: rgb(40, 7, 123);
+  text-decoration: underline rgb(40, 7, 123);
+  font-weight: bold;
+}
