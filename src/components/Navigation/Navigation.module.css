@@ -21,10 +21,12 @@
 }
 
 .link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #481e14;
   font-size: 18px;
   font-weight: 700;
-  margin-left: 26px;
 
   text-transform: uppercase;
 
@@ -53,4 +55,8 @@
 .link:focus {
   font-weight: bold;
   color: #0c134f;
+}
+
+.icon {
+  margin-right: 4px;
 }
