@@ -27,7 +27,7 @@ const Navigation = () => {
           </ul>
         </nav>
       </header>
-      <NavLink to="/movies/:movieId">MovieDetailsPage</NavLink>
+      {/* <NavLink to="/movies/:movieId">MovieDetailsPage</NavLink> */}
     </>
   );
 };

@@ -1,36 +1,36 @@
 import { useEffect, useState } from "react";
-import SearchBar from "../../components/SearchBar/SearchBar";
+import { Link } from "react-router-dom";
+import { getTrendingMovies } from "../../services/moviesAPI.js";
 
 const Home = () => {
-  const [movie, setMovie] = useState([]);
-  const [searchValue, setSearchValue] = useState();
-  const query = searchValue.get("query") ?? "";
+  const [trendingMovies, setTrendingMovies] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await searchMovies();
-        setMovie(data);
+        const movies = await getTrendingMovies();
+        setTrendingMovies(movies);
+        console.log(movies);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  });
+  }, []);
 
-  const handleChangeInput = (e) => {
-    // параметри для пошуку
-    searchValue.set("query", "e.target.value");
-    setSearchValue(searchValue);
-  };
-  const filterData = movies.filter((item) =>
-    item.trends.toLowerCase().includes(searchValue.toLowerCase().trim())
-  );
   return (
     <div>
-      <h1></h1>;
-      <SearchBar />;
+      <h1>Trending today</h1>
+      <input type="text" name="movies" placeholder="Search movies..." />
+      <ul>
+        {trendingMovies.map((movie) => (
+          <li key={movie.id}>
+            <Link to={`movies/${movie.id}`}>{movie.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
+
 export default Home;
