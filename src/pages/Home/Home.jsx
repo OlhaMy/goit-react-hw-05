@@ -10,7 +10,6 @@ const Home = () => {
       try {
         const movies = await getTrendingMovies();
         setTrendingMovies(movies);
-        console.log(movies);
       } catch (error) {
         console.log(error);
       }
@@ -21,7 +20,7 @@ const Home = () => {
   return (
     <div>
       <h1>Trending today</h1>
-      <input type="text" name="movies" placeholder="Search movies..." />
+
       <ul>
         {trendingMovies.map((movie) => (
           <li key={movie.id}>

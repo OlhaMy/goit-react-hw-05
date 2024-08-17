@@ -13,7 +13,6 @@ const Navigation = () => {
           <ul className={s.list}>
             <li className={s.link}>
               <NavLink to="/" className={buildLinkClass}>
-                {" "}
                 <TbHome className={s.icon} />
                 Home
               </NavLink>
@@ -27,7 +26,6 @@ const Navigation = () => {
           </ul>
         </nav>
       </header>
-      {/* <NavLink to="/movies/:movieId">MovieDetailsPage</NavLink> */}
     </>
   );
 };
