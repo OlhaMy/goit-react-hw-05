@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { moviesDetails } from "../../services/moviesAPI";
 import { IoPlayBackSharp } from "react-icons/io5";
+import s from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -36,24 +37,33 @@ const MovieDetailsPage = () => {
   }
 
   return (
-    <div>
-      <Link to={goBackRef.current}>
+    <div className={s.box}>
+      <Link className={s.goBack} to={goBackRef.current}>
         <IoPlayBackSharp /> Go Back
       </Link>
       <img
+        className={s.img}
         src={`https://image.tmdb.org/t/p/w500${details.backdrop_path}`}
         alt={details.title}
       />
-      <h2>{details.title}</h2>
-      <p>User Score: {details.vote_average.toFixed(1)}</p>
-      <p> Overview {details.overview}</p>
-      <p> Genres {details.genres.map((genre) => genre.name).join(" ")}</p>
-      <h2>Additional information</h2>
-      <ul>
-        <li>
+      <h2 className={s.title}>{details.title}</h2>
+      <p className={s.text}>
+        <span className={s.span}>User Score:</span>{" "}
+        {details.vote_average.toFixed(1)}
+      </p>
+      <p className={s.text}>
+        <span className={s.span}>Overview: </span> {details.overview}
+      </p>
+      <p className={s.text}>
+        <span className={s.span}>Genres: </span>
+        {details.genres.map((genre) => genre.name).join(" ")}
+      </p>
+      <h2 className={s.title}>Additional information</h2>
+      <ul className={s.navList}>
+        <li className={s.itemNav}>
           <NavLink to="cast">Cast</NavLink>
         </li>
-        <li>
+        <li className={s.itemNav}>
           <NavLink to="reviews">Reviews</NavLink>
         </li>
       </ul>

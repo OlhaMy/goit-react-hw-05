@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { searchMovies } from "../../services/moviesAPI";
 import { NavLink, useLocation } from "react-router-dom";
 import Movies from "../../components/Navigation/Movies";
+import s from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
   const [query, setQuery] = useState("");
@@ -11,7 +13,10 @@ const MoviesPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (query.trim() === "") return;
+    if (query.trim() === "") {
+      alert("Please enter your search movies!");
+      return;
+    }
 
     try {
       const result = await searchMovies(query);
@@ -22,10 +27,11 @@ const MoviesPage = () => {
   };
 
   return (
-    <div>
+    <div className={s.box}>
       {location.pathname === "/movies" && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={s.form}>
           <input
+            className={s.input}
             type="text"
             name="movies"
             placeholder="Search movies..."

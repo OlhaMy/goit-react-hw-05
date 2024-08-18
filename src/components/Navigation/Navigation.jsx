@@ -8,7 +8,7 @@ const Navigation = () => {
   const buildLinkClass = ({ isActive }) => clsx(s.link, isActive && s.active);
   return (
     <>
-      <header className={s.header}>
+      <div className={s.header}>
         <nav>
           <ul className={s.list}>
             <li className={s.link}>
@@ -26,7 +26,7 @@ const Navigation = () => {
             </li>
           </ul>
         </nav>
-      </header>
+      </div>
     </>
   );
 };

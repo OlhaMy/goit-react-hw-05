@@ -1,0 +1,11 @@
+.box {
+  display: flex;
+  color: #481e14;
+  padding: 10px;
+}
+.title {
+  margin-bottom: 15px;
+}
+.text {
+  margin-bottom: 15px;
+}

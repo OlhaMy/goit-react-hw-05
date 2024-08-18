@@ -1,0 +1,12 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.link {
+  color: #481e14;
+}
+.link:active,
+.link:hover {
+  color: #0c134f;
+}

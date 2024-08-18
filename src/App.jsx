@@ -10,8 +10,10 @@ const NotFoundPage = lazy(() =>
 const MovieDetailsPage = lazy(() =>
   import("./pages/MovieDetailsPage/MovieDetailsPage")
 );
-const MovieCast = lazy(() => import("./components/MovieCast"));
-const MovieReviews = lazy(() => import("./components/MovieReviews"));
+const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("./components/MovieReviews/MovieReviews")
+);
 
 const App = () => {
   return (
