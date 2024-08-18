@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { searchMovies } from "../../services/moviesAPI";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import Movies from "../../components/Navigation/Movies";
 
 const MoviesPage = () => {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,30 +17,25 @@ const MoviesPage = () => {
       const result = await searchMovies(query);
       setMovies(result);
     } catch (error) {
-      console.error("Failed to fetch movies", error);
+      console.error(error);
     }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="movies"
-          placeholder="Search movies..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <NavLink to={`/movies/${movie.id}`}>{movie.title}</NavLink>
-          </li>
-        ))}
-      </ul>
+      {location.pathname === "/movies" && (
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="movies"
+            placeholder="Search movies..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button type="submit">Search</button>
+        </form>
+      )}
+      {movies.length > 0 && <Movies movies={movies} />}
     </div>
   );
 };

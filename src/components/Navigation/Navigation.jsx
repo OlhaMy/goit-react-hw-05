@@ -22,6 +22,7 @@ const Navigation = () => {
                 <MdOutlineLocalMovies className={s.icon} />
                 Movies
               </NavLink>
+              <NavLink to="/movies/:movieId"> </NavLink>
             </li>
           </ul>
         </nav>

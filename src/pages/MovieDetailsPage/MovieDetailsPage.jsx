@@ -1,15 +1,28 @@
-import { moviesDetails } from "../../services/moviesAPI.js";
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import { moviesDetails } from "../../services/moviesAPI";
+import { IoPlayBackSharp } from "react-icons/io5";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
+  console.log(movieId);
   const [details, setDetails] = useState(null);
+  const location = useLocation();
+  const goBackRef = useRef(location.state ?? "/movies");
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         const data = await moviesDetails(movieId);
+        if (!data) {
+          throw new Error("Movie not found");
+        }
         setDetails(data);
       } catch (error) {
         console.error("Failed to fetch movie details", error);
@@ -24,6 +37,9 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
+      <Link to={goBackRef.current}>
+        <IoPlayBackSharp /> Go Back
+      </Link>
       <img
         src={`https://image.tmdb.org/t/p/w500${details.backdrop_path}`}
         alt={details.title}
@@ -41,8 +57,9 @@ const MovieDetailsPage = () => {
           <NavLink to="reviews">Reviews</NavLink>
         </li>
       </ul>
-
-      <Outlet />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

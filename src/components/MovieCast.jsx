@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"; // Додано імпорт useParams
+import { useParams } from "react-router-dom";
 import { moviesCast } from "../services/moviesAPI";
 
 const MovieCast = () => {
@@ -7,28 +7,28 @@ const MovieCast = () => {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
-    const fetchCast = async () => {
+    const fetchMovieCast = async () => {
       try {
         const data = await moviesCast(movieId);
-        setCast(data.cast); // Залежно від структури API може знадобитися доступ до data.cast
+        setCast(data);
       } catch (error) {
-        console.log(error);
+        console.error("Failed to fetch movie details", error);
       }
     };
-    fetchCast();
+    fetchMovieCast();
   }, [movieId]);
+
+  if (!cast) return;
 
   return (
     <div>
       <ul>
         {cast.map((item) => (
           <li key={item.id}>
-            {item.profile_path && (
-              <img
-                src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
-                alt={item.name}
-              />
-            )}
+            <img
+              src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}
+              alt={item.name}
+            />
             <p>{item.name}</p>
             <p>Character: {item.character}</p>
           </li>
