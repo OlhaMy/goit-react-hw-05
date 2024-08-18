@@ -12,10 +12,9 @@ import s from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  console.log(movieId);
   const [details, setDetails] = useState(null);
   const location = useLocation();
-  const goBackRef = useRef(location.state ?? "/movies");
+  const goBackRef = useRef(location.state?.from || "/movies");
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -52,11 +51,11 @@ const MovieDetailsPage = () => {
         {details.vote_average.toFixed(1)}
       </p>
       <p className={s.text}>
-        <span className={s.span}>Overview: </span> {details.overview}
+        <span className={s.span}>Overview:</span> {details.overview}
       </p>
       <p className={s.text}>
-        <span className={s.span}>Genres: </span>
-        {details.genres.map((genre) => genre.name).join(" ")}
+        <span className={s.span}>Genres:</span>{" "}
+        {details.genres.map((genre) => genre.name).join(", ")}
       </p>
       <h2 className={s.title}>Additional information</h2>
       <ul className={s.navList}>
