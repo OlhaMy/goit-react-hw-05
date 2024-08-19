@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { searchMovies } from "../../services/moviesAPI";
 import { useLocation, useSearchParams } from "react-router-dom";
 import MovieList from "../../components/MovieList/MovieList";
@@ -10,7 +10,22 @@ const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    if (query) {
+      const fetchMovies = async () => {
+        try {
+          const result = await searchMovies(query);
+          setMovies(result);
+        } catch (error) {
+          console.error("Failed to fetch movies", error);
+        }
+      };
+
+      fetchMovies();
+    }
+  }, [query]);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (query.trim() === "") {
@@ -19,13 +34,6 @@ const MoviesPage = () => {
     }
 
     setSearchParams({ query });
-
-    try {
-      const result = await searchMovies(query);
-      setMovies(result);
-    } catch (error) {
-      console.error("Failed to fetch movies", error);
-    }
   };
 
   return (
